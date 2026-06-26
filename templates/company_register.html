@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register here....</h2>
+
+    <form action="company_register" method="post">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="Enter First name"> <br>
+        <input type="text" name="last_name" placeholder="Enter Last name"> <br>
+        <input type="text" name="username" placeholder="Enter Username"> <br>
+        <input type="email" name="email" placeholder="Enter your email"> <br>
+        <input type="text" name="company" placeholder="Enter your company name" ><br>
+        <input type="text" name="job" placeholder="Enter Job profile" ><br>
+        <input type="password" name="password" placeholder="Enter password"> <br>
+        <input type="password" name="password2" placeholder="Confirm password"> <br>
+        <input type="submit">
+    </form>
+    <div>
+        {% for mssg in messages %}
+        <h2>{{mssg}}</h2>
+        {% endfor %}
+    </div>
+</body>
+</html>
