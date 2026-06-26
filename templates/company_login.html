@@ -6,13 +6,18 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="login" method="post">
+    <form action="company_login" method="post">
         {% csrf_token %}
-        <input type="text" name="first_name" placeholder="Enter username"> <br>
+        <input type="text" name="username" placeholder="Enter username"> <br>
         <input type="text" name="company" placeholder="Enter company name"> <br>
         <input type="password" name="password" placeholder="Enter password"> <br>
         <input type="submit">
 
     </form>
+      <div>
+        {% for mssg in messages %}
+        <h2>{{mssg}}</h2>
+        {% endfor %}
+    </div>
 </body>
 </html>

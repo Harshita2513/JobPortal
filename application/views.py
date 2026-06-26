@@ -53,7 +53,7 @@ def candidate_login(request) :
         if user is not None :
             auth.login(request, user)
             print("User login success")
-            return render(request, 'index.html')
+            return render(request, 'index.html',{'candidate': candidate})
         else :
             messages.info(request, "False Credentials")
             return redirect('candidate_login')
@@ -127,12 +127,24 @@ def company_login(request) :
         password = request.POST['password']
         company = request.POST['company']
         recruiter = auth.authenticate(username = username, password = password)
-        if recruiter is not None :
-            auth.login(request, recruiter)
-            print("User login success")
-            return render(request, 'index.html')
+        # if recruiter is not None :
+        #     auth.login(request, recruiter)
+        #     print("User login success")
+        #     return render(request, 'index.html')
+        # else :
+        #     messages.info(request, "False Credentials")
+        #     return redirect('company_login')
+        
+        if recruiter is not None:
+            if Company.objects.filter(user=recruiter, company=company).exists():
+                auth.login(request, recruiter)
+                return redirect('index')
+            else:
+                messages.info(request, "Company name incorrect")
+                return redirect('company_login')
         else :
             messages.info(request, "False Credentials")
             return redirect('company_login')
+        
     else :
         return render(request, 'company_login.html')
